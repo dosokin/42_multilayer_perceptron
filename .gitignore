@@ -3,6 +3,4 @@
 venv
 models
 data
-data.csv
-**/*.csv
 **/__pycache__

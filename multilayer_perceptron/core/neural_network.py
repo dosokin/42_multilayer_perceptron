@@ -1,10 +1,8 @@
-import json
-
 import numpy as np
 
-from dataclasses import dataclass
-
 from multilayer_perceptron.core.layer import Layer, LayerParameters
+from multilayer_perceptron.core.model import Model
+
 
 class NeuralNetwork:
 
