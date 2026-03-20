@@ -44,12 +44,12 @@ def add_columns_to_raw_data_frame(df):
     return df
 
 
-def clear_data(df):
+def clean_data(df):
     df = df.drop_duplicates()
 
     df = df.dropna()
 
-    df = df[(df != 0.0).all(axis=1)]
+    df = df[(df.iloc[:,1:] != 0.0).all(axis=1)]
 
     return df
 
@@ -67,18 +67,6 @@ def normalize_data(df):
         df[col] = df[col] / df[col].max()
 
     return df
-
-
-def filter_features(df, features_count):
-
-    diagnostic_corr = df.corr()['diagnostic'].sort_values(ascending=False)
-
-    features_list = diagnostic_corr.index.values.tolist()
-
-    features_count = min(max(features_count, 1), features_count - 1)
-
-    return df[features_list[:features_count + 1]]
-
 
 def split_data_frame(df, training_allocation, seed):
 

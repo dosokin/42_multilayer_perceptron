@@ -15,7 +15,7 @@ def parse_args():
         "--filename",
         help="Input data path. If not specified ./data.csv by default",
         type=str,
-        default="../data.csv"
+        default="data.csv"
     )
 
     parser.add_argument(
@@ -23,7 +23,7 @@ def parse_args():
         "--output",
         help="Output folder. If not specified ./data by default",
         type=str,
-        default="./data"
+        default="data"
     )
 
     parser.add_argument(
@@ -34,14 +34,6 @@ def parse_args():
         help="Specify the part of the dataset for each set in percent.\n\
 Usage: --split a\na => training set allocation in percentage\nBy default 80",
         default=80,
-    )
-
-    parser.add_argument(
-        "--features",
-        help="How many features to keep, sorted by correlation \
-with diagnostic\nDefault to 26",
-        default=26,
-        type=int,
     )
 
     return parser.parse_args()

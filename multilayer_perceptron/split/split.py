@@ -1,16 +1,24 @@
 import pandas as pd
 from pathlib import Path
 
-from args import parse_args
-from data import (
+from multilayer_perceptron.split.args import parse_args
+from multilayer_perceptron.split.data import (
     add_columns_to_raw_data_frame,
-    normalize_data, filter_features,
-    clear_data, split_data_frame)
-from utils import df_to_csv
+    normalize_data,
+    clean_data, split_data_frame)
+from multilayer_perceptron.split.utils import df_to_csv
+
+
+def format_data(df):
+    df = add_columns_to_raw_data_frame(df)
+    df = normalize_data(df)
+    df = clean_data(df)
+
+    return df
 
 
 def split_data(filename="../data.csv", training_allocation=80,
-               output_folder="./data", features_count=26, seed=False):
+               output_folder="../data", seed=False):
 
     file_path = Path(filename)
     if not file_path.exists():
@@ -23,10 +31,7 @@ def split_data(filename="../data.csv", training_allocation=80,
         print(f"Error reading the data source file: {e}")
         return
 
-    df = add_columns_to_raw_data_frame(df)
-    df = normalize_data(df)
-    df = filter_features(df, features_count)
-    df = clear_data(df)
+    df = format_data(df)
 
     train_set, val_set = split_data_frame(df, training_allocation, seed)
 
@@ -48,6 +53,5 @@ if __name__ == "__main__":
         filename=args.filename,
         training_allocation=args.split,
         output_folder=args.output,
-        features_count=args.features,
         seed=args.seed
     )
