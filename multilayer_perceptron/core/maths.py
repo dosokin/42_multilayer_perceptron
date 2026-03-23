@@ -12,8 +12,7 @@ def binary_cross_entropy_error(predictions, expected):
   def f(p, y):
     return y * np.log(p) + (1 - y) * np.log(1 - p)
 
-  loss = f(predictions, expected)
-  loss = loss.sum() * -1 / len(predictions)
+  loss = f(predictions, expected).sum() * -1 / len(predictions)
 
   return loss
 

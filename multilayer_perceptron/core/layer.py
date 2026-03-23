@@ -14,7 +14,7 @@ class Layer:
 
   def __init__(self,
                parameters: LayerParameters,
-               previous_layer: Layer=None):
+               previous_layer=None):
 
     self.W = parameters.weights
     self.B = parameters.biases
